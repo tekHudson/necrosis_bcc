@@ -132,14 +132,13 @@ Local.Events = {
 	"UNIT_MANA",
 	"UNIT_HEALTH",
 	"LEARNED_SPELL_IN_TAB",
-	"CHAT_MSG_SPELL_SELF_DAMAGE",
 	"PLAYER_TARGET_CHANGED",
 	"TRADE_REQUEST",
 	"TRADE_REQUEST_CANCEL",
 	"TRADE_ACCEPT_UPDATE",
 	"TRADE_SHOW",
 	"TRADE_CLOSED",
-	"CHAT_MSG_SPELL_AURA_GONE_OTHER",
+	"COMBAT_LOG_EVENT",
 	"COMBAT_LOG_EVENT_UNFILTERED"
 }
 
@@ -997,6 +996,7 @@ function Necrosis:BuildTooltip(button, Type, anchor, sens)
 	end
 
 	-- Création des bulles d'aides....
+	-- Creation of help bubbles ....
 	GameTooltip:SetOwner(button, anchor)
 	GameTooltip:SetText(NecrosisTooltipData[Type].Label)
 	-- ..... pour le bouton principal
@@ -1438,8 +1438,8 @@ end
 function Necrosis:UpdateMana()
 	if Local.Dead then return end
 
-	local mana = UnitMana("player")
-	local manaMax = UnitManaMax("player")
+	local mana = UnitPower("player", Enum.PowerType.Mana)
+	local manaMax = UnitPowerMax("player", Enum.PowerType.Mana)
 
 	-- Si le pourtour de la pierre affiche la mana
 	if NecrosisConfig.Circle == 3 then
